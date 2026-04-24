@@ -1,45 +1,42 @@
 import java.util.Random;
 
-class Personaje {
-    private String nombre;
-    private int puntosDeVida;
-    private final int MAX_DANO = 30;
-    private final int MIN_DANO = 10;
+public class Personaje {
+    private static final int MIN_DANO = 10;
+    private static final int MAX_DANO = 30;
+    private static final int VIDA_INICIAL = 100;
 
-    //Constructor para inicializar los datos del personaje
+    private final String nombre;
+    private int puntosDeVida;
+    private final Random random;
+
     public Personaje(String nombre) {
         this.nombre = nombre;
-        this.puntosDeVida = 100; //Todos comienzan con 100 puntos de vida
+        this.puntosDeVida = VIDA_INICIAL;
+        this.random = new Random();
     }
 
-    //Metodo para realizar un ataque a otro personaje
     public void atacar(Personaje oponente) {
-        Random rand = new Random();
-        int dano = rand.nextInt(MAX_DANO - MIN_DANO + 1) + MIN_DANO; //Genera un daño aleatorio entre 10 y 30
+        int dano = random.nextInt((MAX_DANO - MIN_DANO) + 1) + MIN_DANO;
         oponente.recibirDano(dano);
-        System.out.println(this.nombre + " ataca a " + oponente.getNombre() + " causando " + dano + " puntos de daño.");
+        System.out.println(nombre + " ataca a " + oponente.getNombre() + " y causa " + dano + " puntos de daño.");
     }
 
-    //Metodo para recibir daño
     public void recibirDano(int dano) {
-        this.puntosDeVida -= dano;
-        if (this.puntosDeVida < 0) {
-            this.puntosDeVida = 0; //No se puede tenermenos de 0 puntos de vida
+        puntosDeVida -= dano;
+        if (puntosDeVida < 0) {
+            puntosDeVida = 0;
         }
     }
 
-    //Verifica si el personaje sigue vivo
     public boolean estaVivo() {
-        return this.puntosDeVida > 0;
+        return puntosDeVida > 0;
     }
 
-    //Devuelve el nombre del personaje
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
-    //Devuelve los puntos de vida actuales del personaje
     public int getPuntosDeVida() {
-        return this.puntosDeVida;
+        return puntosDeVida;
     }
 }
