@@ -1,42 +1,45 @@
 import java.util.Random;
 
-public class Personaje {
-    private static final int MIN_DANO = 10;
-    private static final int MAX_DANO = 30;
-    private static final int VIDA_INICIAL = 100;
-
-    private final String nombre;
+class Personaje {
+    private String nombre;
     private int puntosDeVida;
-    private final Random random;
+    private final int MAX_DANO = 30;
+    private final int MIN_DANO = 10;
 
+    //Constructor para inicializar los datos del personaje
     public Personaje(String nombre) {
         this.nombre = nombre;
-        this.puntosDeVida = VIDA_INICIAL;
-        this.random = new Random();
+        this.puntosDeVida = 100; //Todos comienzan con 100 puntos de vida
     }
 
+    //Metodo para realizar un ataque a otro personaje
     public void atacar(Personaje oponente) {
-        int dano = random.nextInt((MAX_DANO - MIN_DANO) + 1) + MIN_DANO;
+        Random rand = new Random();
+        int dano = rand.nextInt(MAX_DANO - MIN_DANO + 1) + MIN_DANO; //Genera un daño aleatorio entre 10 y 30
         oponente.recibirDano(dano);
-        System.out.println(nombre + " ataca a " + oponente.getNombre() + " y causa " + dano + " puntos de daño.");
+        System.out.println(this.nombre + " ataca a " + oponente.getNombre() + " causando " + dano + " puntos de daño.");
     }
 
+    //Metodo para recibir daño
     public void recibirDano(int dano) {
-        puntosDeVida -= dano;
-        if (puntosDeVida < 0) {
-            puntosDeVida = 0;
+        this.puntosDeVida -= dano;
+        if (this.puntosDeVida < 0) {
+            this.puntosDeVida = 0; //No se puede tenermenos de 0 puntos de vida
         }
     }
 
+    //Verifica si el personaje sigue vivo
     public boolean estaVivo() {
-        return puntosDeVida > 0;
+        return this.puntosDeVida > 0;
     }
 
+    //Devuelve el nombre del personaje
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
+    //Devuelve los puntos de vida actuales del personaje
     public int getPuntosDeVida() {
-        return puntosDeVida;
+        return this.puntosDeVida;
     }
 }
