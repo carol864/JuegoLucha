@@ -1,20 +1,15 @@
-import java.util.Scanner;
-
 public class Main {
     
     // Metodo principal que ejecuta el juego
     public static void main ( String [] args ) {
 
-        Scanner scanner = new Scanner ( System.in);
+        Personaje jugador1 = new Espada(new Armadura(new Guerrero("Ryu")));
 
-        System.out.print (" Introduce el nombre del jugador 1: ");
-        String nombre1 = scanner.nextLine ();
+        Personaje jugador2 = new Guerrero("Ken");
 
-        System.out.print (" Introduce el nombre del jugador 2: ");
-        String nombre2 = scanner.nextLine ();
+        JuegoLucha pelea = new JuegoLucha(jugador1, jugador2);
 
-        JuegoLucha juego = new JuegoLucha ( nombre1 , nombre2 );
-        juego.iniciarPelea ();
+        pelea.iniciarPelea();
         
     } 
 
