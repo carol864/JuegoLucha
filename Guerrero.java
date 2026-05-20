@@ -13,6 +13,6 @@ public class Guerrero extends Personaje{
 
         enemigo.recibirDano(danio);
 
-        System.out.println( nombre + "ataco a " + enemigo.getNombre() + " causando" + danio);
+        System.out.println( nombre + " ataco a " + enemigo.getNombre() + " causando " + danio);
     }
 }
